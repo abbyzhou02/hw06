@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class EvilHangman {
-    Set<String> wordSet; // Current possible words
-    private Set<Character> guessedLetters; // Letters guessed by the player
-    private String currentPattern; // Current revealed pattern (e.g., -e--)
+    Set<String> wordSet;
+    private Set<Character> guessedLetters;
+    private String currentPattern;
 
     // Constructor to initialize the game with a given word length and dictionary
     public EvilHangman(List<String> dictionary, int wordLength) {
