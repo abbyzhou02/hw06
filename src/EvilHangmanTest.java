@@ -4,50 +4,50 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 public class EvilHangmanTest {
-    private EvilHangman game;
+    private EvilHangman g;
 
     @Before
     public void setUp() {
-        game = new EvilHangman("test_dictionary.txt");
+        g = new EvilHangman("testDictionary.txt");
     }
 
     @Test
     public void testInitialWordLength() {
-        String pattern = game.getCurrentPattern();
+        String pattern = g.getCurrentPattern();
         assertTrue(pattern.length() > 0);
         assertTrue(pattern.matches("_+"));
     }
 
     @Test
     public void testPatternUpdates() {
-        String initialPattern = game.getCurrentPattern();
-        game.makeGuess('e');
-        String newPattern = game.getCurrentPattern();
+        String initialPattern = g.getCurrentPattern();
+        g.makeGuess('e');
+        String newPattern = g.getCurrentPattern();
         assertFalse(initialPattern.equals(newPattern) && newPattern.contains("e"));
     }
 
     @Test
     public void testIncorrectGuesses() {
-        game.makeGuess('x');
-        Set<Character> incorrect = game.getIncorrectGuesses();
+        g.makeGuess('x');
+        Set<Character> incorrect = g.getIncorrectGuesses();
         assertTrue(incorrect.contains('x'));
     }
 
     @Test
     public void testPreviousGuesses() {
-        game.makeGuess('a');
-        Set<Character> previous = game.getPreviousGuesses();
+        g.makeGuess('a');
+        Set<Character> previous = g.getPreviousGuesses();
         assertTrue(previous.contains('a'));
     }
 
     @Test
     public void testGameCompletion() {
-        assertFalse(game.isSolved());
+        assertFalse(g.isSolved());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidGuess() {
-        game.makeGuess('1');
+        g.makeGuess('1');
     }
 
 
