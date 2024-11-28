@@ -39,13 +39,13 @@ public class EvilHangman {
 
     public void start() {
         while (!isSolved()) {
-            char guess = processGuess();
+            char guess = promptForGuess();
             recordGuess(guess);
         }
         printVictory();
     }
 
-    private char processGuess() {
+    private char promptForGuess() {
         while (true) {
             System.out.println("Guess a letter.\n");
             printProgress();
