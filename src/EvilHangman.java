@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class EvilHangman {
     private ArrayList<String> wordList;
     private HashSet<Character> previousGuesses;
-    private TreeSet<Character> incorrectGuesses;
+    private TreeSet<Character> incorrectGuesses; // behaves like a hash set, but orders the entries!
     private String currentPattern;
     private Scanner inputScanner;
     private int wordLength;
@@ -62,9 +62,13 @@ public class EvilHangman {
     }
 
     private void recordGuess(char guess) {
-        previousGuesses.add(guess);
-        Map<String, List<String>> families = createWordFamilies(guess);
-        updateGameState(families);
+        if (previousGuesses.add(guess)) {
+            Map<String, List<String>> families = createWordFamilies(guess);
+            updateGameState(families);
+            if (!currentPattern.contains(String.valueOf(guess))) {
+                incorrectGuesses.add(guess);
+            }
+        }
     }
 
     private List<String> filterWordsByLength() {
